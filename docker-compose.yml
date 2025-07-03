@@ -1,0 +1,21 @@
+# A seção 'services' é onde definimos os contêineres que compõem nossa aplicação.
+services:
+  # 'api' é o nome que damos ao nosso serviço (e contêiner) da aplicação FastAPI.
+  api:
+    # 'build: .' instrui o Docker Compose a construir uma imagem a partir do Dockerfile
+    # localizado no diretório atual (onde o docker-compose.yml está).
+    build: .
+    container_name: apilura
+
+    # 'ports' mapeia uma porta do seu computador (host) para uma porta dentro do contêiner.
+    # - "8000:8000" significa que a porta 8000 do seu computador será redirecionada
+    #   para a porta 8000 do contêiner, onde a aplicação está rodando (conforme o comando no Dockerfile).
+    ports:
+      - "8000:8000"
+
+    # 'volumes' sincroniza um diretório do seu computador com um diretório dentro do contêiner.
+    # - ".:/app" monta o diretório atual ('.') do seu computador no diretório '/app' do contêiner.
+    #   Isso é essencial para o desenvolvimento, pois qualquer alteração no seu código local
+    #   será refletida instantaneamente no contêiner, permitindo o hot-reload do uvicorn.
+    volumes:
+      - .:/app
